@@ -1,0 +1,11 @@
+function with {
+	base="$@"
+	while true; do
+		read -p "$base> " cmd
+		# provide a method to exit the sub-shell
+		if [[ $cmd == "exit" ]]; then
+		  return
+		fi
+		eval "$base $cmd"
+	done
+}
