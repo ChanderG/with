@@ -1,0 +1,18 @@
+function with {
+  # check if the alias exists, if so refuse
+  if $(alias w &> /dev/null); then
+	  echo "Alias w already exists. Either some other system is using the alias or you are already inside a with block."
+		echo "Cowardly refusing to continue!!!"
+		return
+	fi
+
+	base="$@"
+	alias w=$base
+	export oldprompt=$PS1
+	PS1="$PS1($base)> "
+}
+
+function endwith {
+  unalias w
+	PS1=$oldprompt
+}

@@ -37,7 +37,36 @@ kubectl -n kube-system> exit
 $ 
 ```
 
+### Shortcomings
+
 It has one problem, the prompt is a sham and not actually a shell. Means, 
 1. No shell features like command completion.
 2. No Up/Down arrow functionality.
 3. No history.
+
+## With - variant 2
+
+Variant 2 of `with` provides you with 2 functions:
++ `with`: start a new with mode where the alias w can be used to mean the specified command
++ `endwith`: end the with mode
+
+Usuage:
+```
+$ with kubectl -n kube-system
+$ (kubectl -n kube-system)> 
+$ (kubectl -n kube-system)> ls # works normally
+$ (kubectl -n kube-system)> # the alias w can now be used to mean `kubectl -n kube-system`
+$ (kubectl -n kube-system)> w get pods
+$ (kubectl -n kube-system)> endwith
+$ 
+```
+
+This way, history and shell completion is a bit better.
+
+### Shortcomings
+
+1. You have to type in `w` every time you need the command.
+2. Your history is now full of the general command `w` and not the actual command.
+3. Shell auto-complete may not work correctly.
+
+Problems #2 and #3 above may be alleviated by manually/automatically expanding aliases in your shell.
